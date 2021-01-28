@@ -5,13 +5,30 @@ import arrow from './images/Mask.png'
 class RegistrationForm extends Component {
     constructor(props) {
         super(props);
+        this.select__head = React.createRef();
         this.state = {
             opacity: 0
         }
     }
     selectListOpen = () => {
-        if (this.state.opacity === 0) this.setState({ opacity: 1 })
-        else this.setState({ opacity: 0 })
+        if (this.state.opacity === 0) {
+            this.setState({ opacity: 1 })
+            let rotate = 0;
+            let interval = setInterval(() => {
+                this.select__head.current.style.transform = `rotate(${rotate}deg)`;
+                rotate += 5;
+                if(rotate === 180) clearInterval(interval)
+            }, 10)
+        }
+        else {
+            this.setState({ opacity: 0 })
+            let rotate = 180;
+            let interval = setInterval(() => {
+                this.select__head.current.style.transform = `rotate(${rotate}deg)`;
+                rotate -= 5;;
+                if(rotate === 0) clearInterval(interval)
+            }, 10)
+        }
     }
     render() {
         const {opacity} = this.state;
@@ -33,7 +50,7 @@ class RegistrationForm extends Component {
                     <div className={classes.form__label_contactDetails}>
                         <label htmlFor="phone">
                             Номер телефона  
-                        </label><input type="text" id="phone" placeholder="Введите номер телефона" className={classes.form__label_input} style={{}} />
+                        </label><input type="text" id="phone" placeholder="Введите номер телефона" className={classes.form__label_input}/>
                     </div>
                     <div className={classes.form__label_language}>
                         <label htmlFor="language">
@@ -41,7 +58,7 @@ class RegistrationForm extends Component {
                         </label>
                         <div className={classes.select_wrapper} 
                             onClick={this.selectListOpen}>
-                            <span><img src={arrow} /></span>
+                            <span><img src={arrow} ref={this.select__head} /></span>
                             <p>Язык</p>
                             <ul className={classes.select__list} style={{opacity}}>
                                 <li>Русский</li>
