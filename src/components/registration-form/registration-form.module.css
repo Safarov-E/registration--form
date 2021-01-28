@@ -122,29 +122,27 @@
     width: 400px;
     height: 52px;
     margin: 6px 0 0 30px;
-}
-.select_wrapper::before {
-    content: "";
-    position: absolute;
-    top: 69%;
-    right: -85%;
-    background: url(./images/Mask.png) no-repeat;
-    width: 100%;
-    height: 100%;
-}
+} 
 .select_wrapper p {
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 21px;
-    color: #2C2738;
+    color: #7C9CBF;
     padding: 15px 0 0 16px;
+}
+.select_wrapper span {
+    float: left;
+    position: absolute;
+    top: 68.80%;
+    right: 8%;
 }
 .select_wrapper ul {
     border: 1px solid #DBE2EA;
     border-radius: 6px;
     margin-top: 20px;
+    transition: 0.5s;
 }
 .select_wrapper ul li {
     list-style: none;

@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import classes from './registration-form.module.css'
+import arrow from './images/Mask.png'
 
 class RegistrationForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            opacity: 0
+        }
+    }
+    selectListOpen = () => {
+        if (this.state.opacity === 0) this.setState({ opacity: 1 })
+        else this.setState({ opacity: 0 })
+    }
     render() {
+        const {opacity} = this.state;
         return (
             <form className={classes.form}>
                 <div className={classes.form__validation}>
@@ -27,9 +39,11 @@ class RegistrationForm extends Component {
                         <label htmlFor="language">
                             Язык
                         </label>
-                        <div className={classes.select_wrapper}>
+                        <div className={classes.select_wrapper} 
+                            onClick={this.selectListOpen}>
+                            <span><img src={arrow} /></span>
                             <p>Язык</p>
-                            <ul className={classes.select__list}>
+                            <ul className={classes.select__list} style={{opacity}}>
                                 <li>Русский</li>
                                 <li>Английский</li>
                                 <li>Китайский</li>
