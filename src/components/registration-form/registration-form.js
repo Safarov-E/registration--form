@@ -6,32 +6,35 @@ class RegistrationForm extends Component {
     constructor(props) {
         super(props);
         this.select__head = React.createRef();
+        this.border = React.createRef();
         this.state = {
-            opacity: 0
+            display: 'none'
         }
     }
     selectListOpen = () => {
-        if (this.state.opacity === 0) {
-            this.setState({ opacity: 1 })
+        if (this.state.display === 'none') {
+            this.border.current.style.boxShadow = '0 0 5px rgb(8 128 174)'
+            this.setState({ display: 'block' })
             let rotate = 0;
             let interval = setInterval(() => {
                 this.select__head.current.style.transform = `rotate(${rotate}deg)`;
                 rotate += 5;
-                if(rotate === 180) clearInterval(interval)
+                if(rotate > 180) clearInterval(interval)
             }, 10)
         }
         else {
-            this.setState({ opacity: 0 })
+            this.setState({ display: 'none' })
+            this.border.current.style.boxShadow = '0px 4px 8px rgba(44, 39, 56, 0.04)'
             let rotate = 180;
             let interval = setInterval(() => {
                 this.select__head.current.style.transform = `rotate(${rotate}deg)`;
                 rotate -= 5;;
-                if(rotate === 0) clearInterval(interval)
+                if(rotate < 0) clearInterval(interval)
             }, 10)
         }
     }
     render() {
-        const {opacity} = this.state;
+        const {display} = this.state;
         return (
             <form className={classes.form}>
                 <div className={classes.form__validation}>
@@ -57,16 +60,27 @@ class RegistrationForm extends Component {
                             Язык
                         </label>
                         <div className={classes.select_wrapper} 
-                            onClick={this.selectListOpen}>
-                            <span><img src={arrow} ref={this.select__head} /></span>
+                            onClick={this.selectListOpen}
+                            ref={this.border}>
+                            <span><img src={arrow} alt="arrow" ref={this.select__head} /></span>
                             <p>Язык</p>
-                            <ul className={classes.select__list} style={{opacity}}>
+                            <ul className={classes.select__list} style={{display}}>
                                 <li>Русский</li>
                                 <li>Английский</li>
                                 <li>Китайский</li>
                                 <li>Испанский</li>
                             </ul>
                         </div>
+                    </div>
+                    <div className={classes.from__checkbox}>
+                        <label>
+                            <input type="checkbox" className={classes.checkbox} />
+                            <span className={classes.fake}></span>
+                        </label>
+                        <p>Принимаю <span>условия</span> использования</p>
+                    </div>
+                    <div className={classes.from__submit}>
+                        <button>Зарегистрироваться</button>
                     </div>
                 </div>
             </form>
