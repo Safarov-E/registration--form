@@ -175,7 +175,7 @@
 .from__checkbox {
     display: flex;
     align-items: center;
-    padding: 30px 30px;
+    padding: 35px 30px;
 }
 .from__checkbox input {
     width: 28px;
@@ -224,4 +224,26 @@
 }
 .checkbox:checked + .fake::before {
     opacity: 1;
+}
+.from__submit {
+    margin: 10px 30px;
+}
+.from__submit button {
+    background: #0880AE;
+    border-radius: 6px;
+    color: #fff;
+    padding: 18px 133px 17px;
+    outline: none;
+    border: 1px solid #0880AE;
+}
+.from__submit_disabled {
+    margin: 10px 30px;
+}
+.from__submit_disabled button  {
+    background: #DBE2EA;
+    border-radius: 6px;
+    color: #b1b5bf;
+    padding: 18px 133px 17px;
+    outline: none;
+    border: 1px solid #DBE2EA;
 }

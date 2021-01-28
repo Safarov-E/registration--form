@@ -8,7 +8,8 @@ class RegistrationForm extends Component {
         this.select__head = React.createRef();
         this.border = React.createRef();
         this.state = {
-            display: 'none'
+            display: 'none',
+            disabled: true
         }
     }
     selectListOpen = () => {
@@ -34,7 +35,7 @@ class RegistrationForm extends Component {
         }
     }
     render() {
-        const {display} = this.state;
+        const {display, disabled} = this.state;
         return (
             <form className={classes.form}>
                 <div className={classes.form__validation}>
@@ -79,8 +80,8 @@ class RegistrationForm extends Component {
                         </label>
                         <p>Принимаю <span>условия</span> использования</p>
                     </div>
-                    <div className={classes.from__submit}>
-                        <button>Зарегистрироваться</button>
+                    <div className={disabled ? classes.from__submit_disabled : classes.from__submit}>
+                        <button disabled={disabled}>Зарегистрироваться</button>
                     </div>
                 </div>
             </form>
