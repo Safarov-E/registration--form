@@ -29,7 +29,7 @@ class RegistrationForm extends Component {
                         </label>
                         <div className={classes.select_wrapper}>
                             <p>Язык</p>
-                            <ul>
+                            <ul className={classes.select__list}>
                                 <li>Русский</li>
                                 <li>Английский</li>
                                 <li>Китайский</li>

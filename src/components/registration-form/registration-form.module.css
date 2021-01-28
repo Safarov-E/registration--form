@@ -141,3 +141,33 @@
     color: #2C2738;
     padding: 15px 0 0 16px;
 }
+.select_wrapper ul {
+    border: 1px solid #DBE2EA;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+.select_wrapper ul li {
+    list-style: none;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgba(44, 39, 56, 0.04), 0px 20px 20px rgba(44, 39, 56, 0.04);
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+    color: #756F86;
+    padding: 16px 16px;
+}
+.select_wrapper ul li:hover {
+    background: #EBF4F8;
+}
+.select_wrapper ul li:nth-child(1) {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.select_wrapper ul li:last-child {
+    border: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
