@@ -247,3 +247,19 @@
     outline: none;
     border: 1px solid #DBE2EA;
 }
+
+
+
+
+
+.form__label span, .form__label_contactDetails span {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 0px;
+    color: #FF7171;
+    padding-left: 30px;
+    display: block;
+    transform: translateY(15px);
+}

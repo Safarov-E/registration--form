@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classes from './registration-form.module.css'
 import arrow from './images/Mask.png'
+import {connect} from 'react-redux'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -9,7 +10,11 @@ class RegistrationForm extends Component {
         this.border = React.createRef();
         this.state = {
             display: 'none',
-            disabled: true
+            disabled: true,
+            errorName: false,
+            errorEmail: false,
+            errorPhone: false,
+            language: ''
         }
     }
     selectListOpen = () => {
@@ -34,8 +39,31 @@ class RegistrationForm extends Component {
             }, 10)
         }
     }
+    handleChangeInputName = (event) => {
+        this.props.onInputName(event.target.value)
+    }
+    handleChangeInputEmail = (event) => {
+        this.props.onInputEmail(event.target.value)
+    }
+    handleChangeInputPhone = (event) => {
+        this.props.onInputPhone(event.target.value)
+    }
+    handleBlurName = () => {
+        if(/^[a-zA-Z\s\-а-яА-Я]{1,}$/i.test(this.props.name)) this.setState({ errorName : false })
+        else this.setState({ errorName : true })
+    }
+    handleBlurEmail = () => {
+        if(/^[a-zA-Z0-9][a-zA-Z0-9._-]{1,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9-]{1,}\.[a-zA-Z]{2,5}$/.test(this.props.email)) {
+            this.setState({ errorEmail : false })
+        } else this.setState({ errorEmail : true })
+    }
+    handleBlurPhone = () => {
+        if(/^\+?(?:[()-]*\d){11}[()-]*$/.test(this.props.phone)) this.setState({ errorPhone : false })
+        else this.setState({ errorPhone : true })
+    }
     render() {
-        const {display, disabled} = this.state;
+        const {display, disabled, language, errorName, errorEmail, errorPhone} = this.state;
+        const {name, email, phone} = this.props;
         return (
             <form className={classes.form}>
                 <div className={classes.form__validation}>
@@ -44,17 +72,35 @@ class RegistrationForm extends Component {
                     <div className={classes.form__label}>
                         <label htmlFor="name">
                             Имя  
-                        </label><input type="text" id="name" placeholder="Введите Ваше имя" className={classes.form__label_input} />
+                        </label><input type="text" id="name" 
+                                        placeholder="Введите Ваше имя" 
+                                        className={classes.form__label_input}
+                                        onChange={this.handleChangeInputName}
+                                        value={name}
+                                        onBlur={this.handleBlurName} />
+                        {errorName ? <span>Имя введено неправильно</span> : null}
                     </div>
                     <div className={classes.form__label_contactDetails}>
                         <label htmlFor="email">
                             Email  
-                        </label><input type="text" id="email" placeholder="Введите ваш email" className={classes.form__label_input} />
+                        </label><input type="text" id="email" 
+                                        placeholder="Введите ваш email" 
+                                        className={classes.form__label_input}
+                                        value={email}
+                                        onChange={this.handleChangeInputEmail} 
+                                        onBlur={this.handleBlurEmail} />
+                        {errorEmail ? <span>Введено не корректное значение</span> : null}
                     </div>
                     <div className={classes.form__label_contactDetails}>
                         <label htmlFor="phone">
                             Номер телефона  
-                        </label><input type="text" id="phone" placeholder="Введите номер телефона" className={classes.form__label_input}/>
+                        </label><input type="text" id="phone" 
+                                        placeholder="Введите номер телефона" 
+                                        className={classes.form__label_input}
+                                        value={phone}
+                                        onChange={this.handleChangeInputPhone} 
+                                        onBlur={this.handleBlurPhone} />
+                        {errorPhone ? <span>Номер телефона введен неправильно</span> : null}
                     </div>
                     <div className={classes.form__label_language}>
                         <label htmlFor="language">
@@ -64,7 +110,7 @@ class RegistrationForm extends Component {
                             onClick={this.selectListOpen}
                             ref={this.border}>
                             <span><img src={arrow} alt="arrow" ref={this.select__head} /></span>
-                            <p>Язык</p>
+                            <p>{language ? language : 'Язык'}</p>
                             <ul className={classes.select__list} style={{display}}>
                                 <li>Русский</li>
                                 <li>Английский</li>
@@ -88,4 +134,18 @@ class RegistrationForm extends Component {
         )
     }
 }
-export default RegistrationForm;
+function mapStateToProps(state) {
+    return {
+        name: state.name,
+        email: state.email,
+        phone: state.phone
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        onInputName: (name) => dispatch({type: "NAME_INPUT", payload: name}),
+        onInputEmail: (email) => dispatch({type: "EMAIL_INPUT", payload: email}),
+        onInputPhone: (phone) => dispatch({type: "PHONE_INPUT", payload: phone})
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm)
