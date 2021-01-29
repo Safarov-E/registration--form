@@ -1,7 +1,9 @@
 const initialState = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    language: '',
+    checked: false
 }
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
@@ -19,6 +21,16 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 phone: action.payload
+            }
+        case 'LANGUAGE_SELECTION':
+            return {
+                ...state,
+                language: action.payload
+            }
+        case 'CHECKED':
+            return {
+                ...state,
+                checked: action.payload
             }
         default:
             return state

@@ -11,11 +11,19 @@ class RegistrationForm extends Component {
         this.state = {
             display: 'none',
             disabled: true,
+            languages: [
+                {id: 1, language: 'Русский'},
+                {id: 2, language: 'Английский'},
+                {id: 3, language: 'Китайский'},
+                {id: 4, language: 'Испанский'}
+            ],
             errorName: false,
             errorEmail: false,
-            errorPhone: false,
-            language: ''
+            errorPhone: false
         }
+    }
+    componentDidMount() {
+        console.log(this.props.checked)
     }
     selectListOpen = () => {
         if (this.state.display === 'none') {
@@ -61,9 +69,15 @@ class RegistrationForm extends Component {
         if(/^\+?(?:[()-]*\d){11}[()-]*$/.test(this.props.phone)) this.setState({ errorPhone : false })
         else this.setState({ errorPhone : true })
     }
+    handlerLanguageSelection = (value, e) => {
+        this.props.onLanguageSelection(value)
+    }
+    handleCheckbox = (event) => {
+        this.props.onChecked(event.target.checked)
+    }
     render() {
-        const {display, disabled, language, errorName, errorEmail, errorPhone} = this.state;
-        const {name, email, phone} = this.props;
+        const {display, disabled, errorName, errorEmail, errorPhone, languages} = this.state;
+        const {name, email, phone, language, checked} = this.props;
         return (
             <form className={classes.form}>
                 <div className={classes.form__validation}>
@@ -112,16 +126,20 @@ class RegistrationForm extends Component {
                             <span><img src={arrow} alt="arrow" ref={this.select__head} /></span>
                             <p>{language ? language : 'Язык'}</p>
                             <ul className={classes.select__list} style={{display}}>
-                                <li>Русский</li>
-                                <li>Английский</li>
-                                <li>Китайский</li>
-                                <li>Испанский</li>
+                                {
+                                    languages.map(item => {
+                                        return <li key={item.id} 
+                                                    onClick={(e) => this.handlerLanguageSelection(item.language, e)}>
+                                                    {item.language}
+                                                </li>
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>
                     <div className={classes.from__checkbox}>
                         <label>
-                            <input type="checkbox" className={classes.checkbox} />
+                            <input type="checkbox" checked={checked} className={classes.checkbox} onChange={this.handleCheckbox} />
                             <span className={classes.fake}></span>
                         </label>
                         <p>Принимаю <span>условия</span> использования</p>
@@ -138,14 +156,18 @@ function mapStateToProps(state) {
     return {
         name: state.name,
         email: state.email,
-        phone: state.phone
+        phone: state.phone,
+        language: state.language,
+        checked: state.checked
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         onInputName: (name) => dispatch({type: "NAME_INPUT", payload: name}),
         onInputEmail: (email) => dispatch({type: "EMAIL_INPUT", payload: email}),
-        onInputPhone: (phone) => dispatch({type: "PHONE_INPUT", payload: phone})
+        onInputPhone: (phone) => dispatch({type: "PHONE_INPUT", payload: phone}),
+        onLanguageSelection: (language) => dispatch({type: "LANGUAGE_SELECTION", payload: language}),
+        onChecked: (checked) => dispatch({type: "CHECKED", payload: checked}),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm)
