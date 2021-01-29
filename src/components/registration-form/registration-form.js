@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './registration-form.module.css'
+import './registration-form.css'
 import arrow from './images/Mask.png'
 import {connect} from 'react-redux'
 
@@ -18,7 +18,10 @@ class RegistrationForm extends Component {
             ],
             errorName: false,
             errorEmail: false,
-            errorPhone: false
+            errorPhone: false,
+            errorInpName: true,
+            errorInpEmail: true,
+            errorInpPhone: true,
         }
     }
     selectListOpen = () => {
@@ -45,25 +48,19 @@ class RegistrationForm extends Component {
     }
     handleChangeInputName = (event) => {
         this.props.onInputName(event.target.value)
+        if(/^[a-zA-Zа-яА-Я]{1,23}[\s|-][a-zA-Zа-яА-Я]{1,23}$/.test(event.target.value)) this.setState({ errorName : true, errorInpName: false })
+        else this.setState({ errorName : false, errorInpName: false })
     }
     handleChangeInputEmail = (event) => {
         this.props.onInputEmail(event.target.value)
+        if(/^[a-zA-Z0-9][a-zA-Z0-9._-]{1,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9-]{1,}\.[a-zA-Z]{2,5}$/.test(event.target.value)) {
+            this.setState({ errorEmail : true, errorInpEmail: false })
+        } else this.setState({ errorEmail : false, errorInpEmail: false  })
     }
     handleChangeInputPhone = (event) => {
         this.props.onInputPhone(event.target.value)
-    }
-    handleBlurName = () => {
-        if(/^[a-zA-Z\s\-а-яА-Я]{1,}$/i.test(this.props.name)) this.setState({ errorName : false })
-        else this.setState({ errorName : true })
-    }
-    handleBlurEmail = () => {
-        if(/^[a-zA-Z0-9][a-zA-Z0-9._-]{1,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9-]{1,}\.[a-zA-Z]{2,5}$/.test(this.props.email)) {
-            this.setState({ errorEmail : false })
-        } else this.setState({ errorEmail : true })
-    }
-    handleBlurPhone = () => {
-        if(/^\+?(?:[()-]*\d){11}[()-]*$/.test(this.props.phone)) this.setState({ errorPhone : false })
-        else this.setState({ errorPhone : true })
+        if(/^\+?(?:[()-]*\d){11}[()-]*$/.test(event.target.value) && event.target.value !== '') this.setState({ errorPhone : true, errorInpPhone: false  })
+        else this.setState({ errorPhone : false, errorInpPhone: false  })
     }
     handlerLanguageSelection = (value, e) => {
         this.props.onLanguageSelection(value)
@@ -72,60 +69,57 @@ class RegistrationForm extends Component {
         this.props.onChecked(event.target.checked)
     }
     handleSubmit = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
     }
     render() {
-        const {display, errorName, errorEmail, errorPhone, languages} = this.state;
+        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone} = this.state;
         const {name, email, phone, language, checked} = this.props;
-        console.log(errorEmail)
         return (
-            <form className={classes.form} onSubmit={this.handleSubmit}>
-                <div className={classes.form__validation}>
-                    <h2 className={classes.form__title}>Регистрация</h2>
-                    <p className={classes.form__description}>Уже есть аккаунт? <span><a href="/">Войти</a></span></p>
-                    <div className={classes.form__label}>
+            <form className="form" onSubmit={this.handleSubmit}>
+                <div className="form__validation">
+                    <h2 className="form__title">Регистрация</h2>
+                    <p className="form__description">Уже есть аккаунт? <span><a href="/">Войти</a></span></p>
+                    <div className="form__label">
                         <label htmlFor="name">
                             Имя  
                         </label><input type="text" id="name" 
                                         placeholder="Введите Ваше имя" 
-                                        className={classes.form__label_input}
+                                        className="form__label_input"
+                                        onClick={this.firstСlick}
                                         onChange={this.handleChangeInputName}
-                                        value={name}
-                                        onBlur={this.handleBlurName} />
-                        {errorName ? <span>Имя введено неправильно</span> : null}
+                                        value={name} />
+                        {!errorName && !errorInpName  ? <span>Имя введено неправильно</span> : null}
                     </div>
-                    <div className={classes.form__label_contactDetails}>
+                    <div className="form__label_contactDetails">
                         <label htmlFor="email">
                             Email  
                         </label><input type="text" id="email" 
                                         placeholder="Введите ваш email" 
-                                        className={classes.form__label_input}
+                                        className="form__label_input"
                                         value={email}
-                                        onChange={this.handleChangeInputEmail} 
-                                        onBlur={this.handleBlurEmail} />
-                        {errorEmail ? <span>Введено не корректное значение</span> : null}
+                                        onChange={this.handleChangeInputEmail} />
+                        {!errorEmail && !errorInpEmail ? <span>Введено не корректное значение</span> : null}
                     </div>
-                    <div className={classes.form__label_contactDetails}>
+                    <div className="form__label_contactDetails">
                         <label htmlFor="phone">
                             Номер телефона  
                         </label><input type="text" id="phone" 
                                         placeholder="Введите номер телефона" 
-                                        className={classes.form__label_input}
+                                        className="form__label_input"
                                         value={phone}
-                                        onChange={this.handleChangeInputPhone} 
-                                        onBlur={this.handleBlurPhone} />
-                        {errorPhone ? <span>Номер телефона введен неправильно</span> : null}
+                                        onChange={this.handleChangeInputPhone} />
+                        {!errorPhone && !errorInpPhone ? <span>Номер телефона введен неправильно</span> : null}
                     </div>
-                    <div className={classes.form__label_language}>
+                    <div className="form__label_language">
                         <label htmlFor="language">
                             Язык
                         </label>
-                        <div className={classes.select_wrapper} 
+                        <div className="select_wrapper"
                             onClick={this.selectListOpen}
                             ref={this.border}>
                             <span><img src={arrow} alt="arrow" ref={this.select__head} /></span>
                             <p>{language ? language : 'Язык'}</p>
-                            <ul className={classes.select__list} style={{display}}>
+                            <ul className="select__list" style={{display}}>
                                 {
                                     languages.map(item => {
                                         return <li key={item.id} 
@@ -137,15 +131,15 @@ class RegistrationForm extends Component {
                             </ul>
                         </div>
                     </div>
-                    <div className={classes.from__checkbox}>
+                    <div className="from__checkbox">
                         <label>
-                            <input type="checkbox" checked={checked} className={classes.checkbox} onChange={this.handleCheckbox} />
-                            <span className={classes.fake}></span>
+                            <input type="checkbox" checked={checked} className="checkbox" onChange={this.handleCheckbox} />
+                            <span className="fake"></span>
                         </label>
                         <p>Принимаю <span>условия</span> использования</p>
                     </div>
-                    <div className={!(!errorName && !errorEmail && !errorPhone && checked) ? classes.from__submit_disabled : classes.from__submit}>
-                        <button disabled={!(!errorName && !errorEmail && !errorPhone && checked)}>Зарегистрироваться</button>
+                    <div className={!(errorName && errorEmail && errorPhone && checked) ? "from__submit_disabled" : "from__submit"}>
+                        <button disabled={!(errorName && errorEmail && errorPhone && checked)}>Зарегистрироваться</button>
                     </div>
                 </div>
             </form>
