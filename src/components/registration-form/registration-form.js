@@ -22,9 +22,6 @@ class RegistrationForm extends Component {
             errorPhone: false
         }
     }
-    componentDidMount() {
-        console.log(this.props.checked)
-    }
     selectListOpen = () => {
         if (this.state.display === 'none') {
             this.border.current.style.boxShadow = '0 0 5px rgb(8 128 174)'
@@ -144,8 +141,8 @@ class RegistrationForm extends Component {
                         </label>
                         <p>Принимаю <span>условия</span> использования</p>
                     </div>
-                    <div className={disabled ? classes.from__submit_disabled : classes.from__submit}>
-                        <button disabled={disabled}>Зарегистрироваться</button>
+                    <div className={!(errorName || errorEmail || errorPhone || checked) ? classes.from__submit_disabled : classes.from__submit}>
+                        <button disabled={!(errorName || errorEmail || errorPhone || checked)}>Зарегистрироваться</button>
                     </div>
                 </div>
             </form>
