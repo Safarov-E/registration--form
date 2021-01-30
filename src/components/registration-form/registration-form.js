@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
 import Checkbox from '../checkbox'
 import TodoList from '../todo-list'
+import Modal from '../modal'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class RegistrationForm extends Component {
             errorInpName: true,
             errorInpEmail: true,
             errorInpPhone: true,
+            modal: false
         }
     }
     selectListOpen = () => {
@@ -87,55 +89,59 @@ class RegistrationForm extends Component {
         } else this.setState({ errorPhone : false, errorInpPhone: false  })
     }
     handleSubmit = (event) => {
-        // event.preventDefault()
+        this.setState({ modal : true})
+        event.preventDefault()
     }
     render() {
-        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone} = this.state;
+        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone, modal} = this.state;
         const {name, email, phone, language, checked} = this.props;
         return (
-            <form className="form" onSubmit={this.handleSubmit}>
-                <div className="form__validation">
-                    <h2 className="form__title">Регистрация</h2>
-                    <p className="form__description">Уже есть аккаунт? <span><a href="/">Войти</a></span></p>
-                    <div className="form__label">
-                        <Input nameInput={'Имя'}
-                                handleChange={this.handleChangeInputName}
-                                value={name} htmlFor={'name'}
-                                errorName={errorName} errorInpName={errorInpName}
-                                placeholder={'Введите Ваше имя'}
-                                handleBlur={this.handleBlurInputName}
-                                errorMessage={'Имя введено неправильно'} />
+            <>
+                <form className="form" onSubmit={this.handleSubmit}>
+                    <div className="form__validation">
+                        <h2 className="form__title">Регистрация</h2>
+                        <p className="form__description">Уже есть аккаунт? <span><a href="/">Войти</a></span></p>
+                        <div className="form__label">
+                            <Input nameInput={'Имя'}
+                                    handleChange={this.handleChangeInputName}
+                                    value={name} htmlFor={'name'}
+                                    errorName={errorName} errorInpName={errorInpName}
+                                    placeholder={'Введите Ваше имя'}
+                                    handleBlur={this.handleBlurInputName}
+                                    errorMessage={'Имя введено неправильно'} />
+                        </div>
+                        <div className="form__label_contactDetails">
+                            <Input nameInput={'Email'}
+                                    handleChange={this.handleChangeInputEmail}
+                                    value={email} htmlFor={'email'}
+                                    errorName={errorEmail} errorInpName={errorInpEmail}
+                                    placeholder={'Введите ваш email'}
+                                    handleBlur={this.handleBlurInputEmail}
+                                    errorMessage={'Введено не корректное значение'} />
+                        </div>
+                        <div className="form__label_contactDetails">
+                            <Input nameInput={'Номер телефона'}
+                                    handleChange={this.handleChangeInputPhone}
+                                    value={phone} htmlFor={'phone'}
+                                    errorName={errorPhone} errorInpName={errorInpPhone}
+                                    placeholder={'Введите номер телефона'}
+                                    handleBlur={this.handleBlurInputPhone}
+                                    errorMessage={'Номер телефона введен неправильно'} />
+                        </div>
+                        <TodoList 
+                            selectListOpen={this.selectListOpen} 
+                            select__head={this.select__head} 
+                            border={this.border} language={language} 
+                            display={display} languages={languages}
+                            handlerLanguageSelection={this.handlerLanguageSelection} />
+                        <Checkbox checked={checked} handleCheckbox={this.handleCheckbox} />
+                        <div className={!(errorName && errorEmail && errorPhone && checked) ? "from__submit_disabled" : "from__submit"}>
+                            <button disabled={!(errorName && errorEmail && errorPhone && checked)}>Зарегистрироваться</button>
+                        </div>
                     </div>
-                    <div className="form__label_contactDetails">
-                        <Input nameInput={'Email'}
-                                handleChange={this.handleChangeInputEmail}
-                                value={email} htmlFor={'email'}
-                                errorName={errorEmail} errorInpName={errorInpEmail}
-                                placeholder={'Введите ваш email'}
-                                handleBlur={this.handleBlurInputEmail}
-                                errorMessage={'Введено не корректное значение'} />
-                    </div>
-                    <div className="form__label_contactDetails">
-                        <Input nameInput={'Номер телефона'}
-                                handleChange={this.handleChangeInputPhone}
-                                value={phone} htmlFor={'phone'}
-                                errorName={errorPhone} errorInpName={errorInpPhone}
-                                placeholder={'Введите номер телефона'}
-                                handleBlur={this.handleBlurInputPhone}
-                                errorMessage={'Номер телефона введен неправильно'} />
-                    </div>
-                    <TodoList 
-                        selectListOpen={this.selectListOpen} 
-                        select__head={this.select__head} 
-                        border={this.border} language={language} 
-                        display={display} languages={languages}
-                        handlerLanguageSelection={this.handlerLanguageSelection} />
-                    <Checkbox checked={checked} handleCheckbox={this.handleCheckbox} />
-                    <div className={!(errorName && errorEmail && errorPhone && checked) ? "from__submit_disabled" : "from__submit"}>
-                        <button disabled={!(errorName && errorEmail && errorPhone && checked)}>Зарегистрироваться</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+                {modal ? <Modal /> : null}
+            </>
         )
     }
 }
