@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import succes from './images/185ad7479f20cbe5ddeaa548a37d586d.png'
+import succes from '../../assets/images/185ad7479f20cbe5ddeaa548a37d586d.png'
 import './modal.css'
 import {connect} from 'react-redux'
 import {onInputClear} from '../../store/actions/actions'

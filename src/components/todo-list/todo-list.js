@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TodoItem from '../todo-item'
-import arrow from '../registration-form/images/Mask.png'
+import arrow from '../../assets/images/Mask.png'
 
 class TodoList extends Component {
     render() {
