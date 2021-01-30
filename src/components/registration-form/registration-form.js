@@ -3,6 +3,7 @@ import './registration-form.css'
 import arrow from './images/Mask.png'
 import Input from '../input';
 import {connect} from 'react-redux'
+import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -151,11 +152,11 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        onInputName: (name) => dispatch({type: "NAME_INPUT", payload: name}),
-        onInputEmail: (email) => dispatch({type: "EMAIL_INPUT", payload: email}),
-        onInputPhone: (phone) => dispatch({type: "PHONE_INPUT", payload: phone}),
-        onLanguageSelection: (language) => dispatch({type: "LANGUAGE_SELECTION", payload: language}),
-        onChecked: (checked) => dispatch({type: "CHECKED", payload: checked}),
+        onInputName: (name) => dispatch(inputName(name)),
+        onInputEmail: (email) => dispatch(inputEmail(email)),
+        onInputPhone: (phone) => dispatch(inputPhone(phone)),
+        onLanguageSelection: (language) => dispatch(languageSelection(language)),
+        onChecked: (checked) => dispatch(onChecked(checked)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm)
