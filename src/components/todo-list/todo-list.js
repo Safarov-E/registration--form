@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TodoItem from '../todo-item'
 import arrow from '../registration-form/images/Mask.png'
 
 class TodoList extends Component {
@@ -17,10 +18,7 @@ class TodoList extends Component {
                     <ul className="select__list" style={{display}}>
                         {
                             languages.map(item => {
-                                return <li key={item.id} 
-                                            onClick={(e) => handlerLanguageSelection(item.language, e)}>
-                                            {item.language}
-                                        </li>
+                                return <TodoItem key={item.id} handlerLanguageSelection={handlerLanguageSelection} language={item.language} />
                             })
                         }
                     </ul>

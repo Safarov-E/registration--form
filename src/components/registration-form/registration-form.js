@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './registration-form.css'
-import arrow from './images/Mask.png'
 import Input from '../input';
 import {connect} from 'react-redux'
 import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
@@ -66,7 +65,7 @@ class RegistrationForm extends Component {
         if(/^\+?(?:[()-]*\d){11}[()-]*$/.test(event.target.value) && event.target.value !== '') this.setState({ errorPhone : true, errorInpPhone: false  })
         else this.setState({ errorPhone : false, errorInpPhone: false  })
     }
-    handlerLanguageSelection = (value, e) => {
+    handlerLanguageSelection = (value) => {
         this.props.onLanguageSelection(value)
     }
     handleCheckbox = (event) => {
