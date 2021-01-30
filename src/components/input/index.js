@@ -1,2 +1,2 @@
-import RegistrationForm from './registration-form'
-export default RegistrationForm
+import Input from './input'
+export default Input

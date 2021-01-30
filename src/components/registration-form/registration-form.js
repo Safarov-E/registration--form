@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './registration-form.css'
 import arrow from './images/Mask.png'
+import Input from '../input';
 import {connect} from 'react-redux'
 
 class RegistrationForm extends Component {
@@ -48,7 +49,7 @@ class RegistrationForm extends Component {
     }
     handleChangeInputName = (event) => {
         this.props.onInputName(event.target.value)
-        if(/^[a-zA-Zа-яА-Я]{1,23}[\s|-][a-zA-Zа-яА-Я]{1,23}$/.test(event.target.value)) this.setState({ errorName : true, errorInpName: false })
+        if(/^[a-zA-Zа-яА-Я\s|-]{1,23}$/.test(event.target.value)) this.setState({ errorName : true, errorInpName: false })
         else this.setState({ errorName : false, errorInpName: false })
     }
     handleChangeInputEmail = (event) => {
@@ -80,35 +81,28 @@ class RegistrationForm extends Component {
                     <h2 className="form__title">Регистрация</h2>
                     <p className="form__description">Уже есть аккаунт? <span><a href="/">Войти</a></span></p>
                     <div className="form__label">
-                        <label htmlFor="name">
-                            Имя  
-                        </label><input type="text" id="name" 
-                                        placeholder="Введите Ваше имя" 
-                                        className="form__label_input"
-                                        onClick={this.firstСlick}
-                                        onChange={this.handleChangeInputName}
-                                        value={name} />
-                        {!errorName && !errorInpName  ? <span>Имя введено неправильно</span> : null}
+                        <Input nameInput={'Имя'}
+                                handleChange={this.handleChangeInputName}
+                                value={name} htmlFor={'name'}
+                                errorName={errorName} errorInpName={errorInpName}
+                                placeholder={'Введите Ваше имя'}
+                                errorMessage={'Имя введено неправильно'} />
                     </div>
                     <div className="form__label_contactDetails">
-                        <label htmlFor="email">
-                            Email  
-                        </label><input type="text" id="email" 
-                                        placeholder="Введите ваш email" 
-                                        className="form__label_input"
-                                        value={email}
-                                        onChange={this.handleChangeInputEmail} />
-                        {!errorEmail && !errorInpEmail ? <span>Введено не корректное значение</span> : null}
+                        <Input nameInput={'Email'}
+                                handleChange={this.handleChangeInputEmail}
+                                value={email} htmlFor={'email'}
+                                errorName={errorEmail} errorInpName={errorInpEmail}
+                                placeholder={'Введите ваш email'}
+                                errorMessage={'Введено не корректное значение'} />
                     </div>
                     <div className="form__label_contactDetails">
-                        <label htmlFor="phone">
-                            Номер телефона  
-                        </label><input type="text" id="phone" 
-                                        placeholder="Введите номер телефона" 
-                                        className="form__label_input"
-                                        value={phone}
-                                        onChange={this.handleChangeInputPhone} />
-                        {!errorPhone && !errorInpPhone ? <span>Номер телефона введен неправильно</span> : null}
+                        <Input nameInput={'Номер телефона'}
+                                handleChange={this.handleChangeInputPhone}
+                                value={phone} htmlFor={'phone'}
+                                errorName={errorPhone} errorInpName={errorInpPhone}
+                                placeholder={'Введите номер телефона'}
+                                errorMessage={'Номер телефона введен неправильно'} />
                     </div>
                     <div className="form__label_language">
                         <label htmlFor="language">
