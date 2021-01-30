@@ -4,6 +4,7 @@ import arrow from './images/Mask.png'
 import Input from '../input';
 import {connect} from 'react-redux'
 import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
+import Checkbox from '../checkbox'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -126,13 +127,7 @@ class RegistrationForm extends Component {
                             </ul>
                         </div>
                     </div>
-                    <div className="from__checkbox">
-                        <label>
-                            <input type="checkbox" checked={checked} className="checkbox" onChange={this.handleCheckbox} />
-                            <span className="fake"></span>
-                        </label>
-                        <p>Принимаю <span>условия</span> использования</p>
-                    </div>
+                    <Checkbox checked={checked} handleCheckbox={this.handleCheckbox} />
                     <div className={!(errorName && errorEmail && errorPhone && checked) ? "from__submit_disabled" : "from__submit"}>
                         <button disabled={!(errorName && errorEmail && errorPhone && checked)}>Зарегистрироваться</button>
                     </div>

@@ -194,7 +194,8 @@
     line-height: 21px;
     color: #756F86;
 }
-.from__checkbox span {
+.from__checkbox a {
+    text-decoration: none;
     color: #0880ae;
 }
 .fake {
