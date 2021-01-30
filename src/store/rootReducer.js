@@ -1,11 +1,12 @@
-import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED} from './actions/action-types'
+import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL} from './actions/action-types'
 
 const initialState = {
     name: '',
     email: '',
     phone: '',
     language: '',
-    checked: false
+    checked: false,
+    modal: false,
 }
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
@@ -33,6 +34,21 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 checked: action.payload
+            }
+        case MODAL:
+            return {
+                ...state,
+                modal: true
+            }
+        case INPUT_CLEAR:
+            return {
+                ...state,
+                name: '',
+                email: '',
+                phone: '',
+                language: '',
+                checked: false,
+                modal: false
             }
         default:
             return state

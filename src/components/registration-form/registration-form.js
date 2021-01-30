@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './registration-form.css'
 import Input from '../input';
 import {connect} from 'react-redux'
-import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
+import {inputName, inputEmail, inputPhone, languageSelection, onChecked, onModal} from '../../store/actions/actions'
 import Checkbox from '../checkbox'
 import TodoList from '../todo-list'
 import Modal from '../modal'
@@ -25,8 +25,7 @@ class RegistrationForm extends Component {
             errorPhone: false,
             errorInpName: true,
             errorInpEmail: true,
-            errorInpPhone: true,
-            modal: false
+            errorInpPhone: true
         }
     }
     selectListOpen = () => {
@@ -89,12 +88,12 @@ class RegistrationForm extends Component {
         } else this.setState({ errorPhone : false, errorInpPhone: false  })
     }
     handleSubmit = (event) => {
-        this.setState({ modal : true})
+        this.props.onModal()
         event.preventDefault()
     }
     render() {
-        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone, modal} = this.state;
-        const {name, email, phone, language, checked} = this.props;
+        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone} = this.state;
+        const {name, email, phone, language, checked, modal} = this.props;
         return (
             <>
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -151,7 +150,8 @@ function mapStateToProps(state) {
         email: state.email,
         phone: state.phone,
         language: state.language,
-        checked: state.checked
+        checked: state.checked,
+        modal: state.modal
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -161,6 +161,7 @@ function mapDispatchToProps(dispatch) {
         onInputPhone: (phone) => dispatch(inputPhone(phone)),
         onLanguageSelection: (language) => dispatch(languageSelection(language)),
         onChecked: (checked) => dispatch(onChecked(checked)),
+        onModal: () => dispatch(onModal())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm)

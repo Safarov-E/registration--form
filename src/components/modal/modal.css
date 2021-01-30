@@ -31,7 +31,7 @@
     padding-left: 50px;
     width: 85%;
 }
-.modal__content_description a {
+.modal__content_description span {
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: normal;
@@ -41,6 +41,7 @@
     padding-top: 10px;
     padding-left: 50px;
     color: #0880AE;
+    cursor: pointer;
 }
 .modal__content_description p {
     font-family: IBM Plex Sans;
@@ -63,4 +64,5 @@
     outline: none;
     display: flex;
     margin: 20px auto 0 auto;
+    cursor: pointer;
 }

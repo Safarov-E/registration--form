@@ -1,4 +1,4 @@
-import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED} from './action-types' 
+import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL} from './action-types' 
 
 export function inputName(name) {
     return {
@@ -28,5 +28,15 @@ export function onChecked(checked) {
     return {
         type: CHECKED, 
         payload: checked
+    }
+}
+export function onInputClear() {
+    return {
+        type: INPUT_CLEAR
+    }
+}
+export function onModal() {
+    return {
+        type: MODAL
     }
 }
