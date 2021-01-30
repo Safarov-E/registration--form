@@ -5,6 +5,7 @@ import Input from '../input';
 import {connect} from 'react-redux'
 import {inputName, inputEmail, inputPhone, languageSelection, onChecked} from '../../store/actions/actions'
 import Checkbox from '../checkbox'
+import TodoList from '../todo-list'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -106,27 +107,12 @@ class RegistrationForm extends Component {
                                 placeholder={'Введите номер телефона'}
                                 errorMessage={'Номер телефона введен неправильно'} />
                     </div>
-                    <div className="form__label_language">
-                        <label htmlFor="language">
-                            Язык
-                        </label>
-                        <div className="select_wrapper"
-                            onClick={this.selectListOpen}
-                            ref={this.border}>
-                            <span><img src={arrow} alt="arrow" ref={this.select__head} /></span>
-                            <p>{language ? language : 'Язык'}</p>
-                            <ul className="select__list" style={{display}}>
-                                {
-                                    languages.map(item => {
-                                        return <li key={item.id} 
-                                                    onClick={(e) => this.handlerLanguageSelection(item.language, e)}>
-                                                    {item.language}
-                                                </li>
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    </div>
+                    <TodoList 
+                        selectListOpen={this.selectListOpen} 
+                        select__head={this.select__head} 
+                        border={this.border} language={language} 
+                        display={display} languages={languages}
+                        handlerLanguageSelection={this.handlerLanguageSelection} />
                     <Checkbox checked={checked} handleCheckbox={this.handleCheckbox} />
                     <div className={!(errorName && errorEmail && errorPhone && checked) ? "from__submit_disabled" : "from__submit"}>
                         <button disabled={!(errorName && errorEmail && errorPhone && checked)}>Зарегистрироваться</button>
