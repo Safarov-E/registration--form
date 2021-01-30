@@ -14,12 +14,6 @@ class RegistrationForm extends Component {
         this.border = React.createRef();
         this.state = {
             display: 'none',
-            languages: [
-                {id: 1, language: 'Русский'},
-                {id: 2, language: 'Английский'},
-                {id: 3, language: 'Китайский'},
-                {id: 4, language: 'Испанский'}
-            ],
             errorName: false,
             errorEmail: false,
             errorPhone: false,
@@ -92,8 +86,8 @@ class RegistrationForm extends Component {
         event.preventDefault()
     }
     render() {
-        const {display, errorName, errorEmail, errorPhone, languages, errorInpName, errorInpEmail, errorInpPhone} = this.state;
-        const {name, email, phone, language, checked, modal} = this.props;
+        const {display, errorName, errorEmail, errorPhone, errorInpName, errorInpEmail, errorInpPhone} = this.state;
+        const {name, email, phone, language, checked, modal, languages,} = this.props;
         return (
             <>
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -151,7 +145,8 @@ function mapStateToProps(state) {
         phone: state.phone,
         language: state.language,
         checked: state.checked,
-        modal: state.modal
+        modal: state.modal,
+        languages: state.languages
     }
 }
 function mapDispatchToProps(dispatch) {

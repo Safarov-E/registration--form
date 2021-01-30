@@ -1,6 +1,12 @@
 import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL} from './actions/action-types'
 
 const initialState = {
+    languages: [
+        {id: 1, language: 'Русский'},
+        {id: 2, language: 'Английский'},
+        {id: 3, language: 'Китайский'},
+        {id: 4, language: 'Испанский'}
+    ],
     name: '',
     email: '',
     phone: '',
