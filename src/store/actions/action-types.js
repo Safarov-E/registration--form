@@ -1,0 +1,5 @@
+export const NAME_INPUT = 'NAME_INPUT'
+export const EMAIL_INPUT = 'EMAIL_INPUT'
+export const PHONE_INPUT = 'PHONE_INPUT'
+export const LANGUAGE_SELECTION = 'LANGUAGE_SELECTION'
+export const CHECKED = 'CHECKED'
