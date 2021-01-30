@@ -73,19 +73,19 @@ class RegistrationForm extends Component {
         this.props.onChecked(event.target.checked)
     }
     handleBlurInputName = (event) => {
-        if(event.target.value) {
-            this.setState({ errorName : true, errorInpName: false })
-        } else this.setState({ errorName : false, errorInpName: false  })
+        if(event.target.value === '') {
+            this.setState({ errorName : false, errorInpName: false })
+        }
     }
     handleBlurInputEmail = (event) => {
-        if(event.target.value) {
-            this.setState({ errorEmail : true, errorInpEmail: false })
-        } else this.setState({ errorEmail : false, errorInpEmail: false  })
+        if(event.target.value === '') {
+            this.setState({ errorEmail : false, errorInpEmail: false })
+        }
     }
     handleBlurInputPhone = (event) => {
-        if(event.target.value) {
-            this.setState({ errorPhone : true, errorInpPhone: false })
-        } else this.setState({ errorPhone : false, errorInpPhone: false  })
+        if(event.target.value === '') {
+            this.setState({ errorPhone : false, errorInpPhone: false })
+        }
     }
     handleSubmit = (event) => {
         this.props.onModal()
