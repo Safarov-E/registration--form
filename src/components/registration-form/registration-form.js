@@ -71,6 +71,21 @@ class RegistrationForm extends Component {
     handleCheckbox = (event) => {
         this.props.onChecked(event.target.checked)
     }
+    handleBlurInputName = (event) => {
+        if(event.target.value) {
+            this.setState({ errorName : true, errorInpName: false })
+        } else this.setState({ errorName : false, errorInpName: false  })
+    }
+    handleBlurInputEmail = (event) => {
+        if(event.target.value) {
+            this.setState({ errorEmail : true, errorInpEmail: false })
+        } else this.setState({ errorEmail : false, errorInpEmail: false  })
+    }
+    handleBlurInputPhone = (event) => {
+        if(event.target.value) {
+            this.setState({ errorPhone : true, errorInpPhone: false })
+        } else this.setState({ errorPhone : false, errorInpPhone: false  })
+    }
     handleSubmit = (event) => {
         // event.preventDefault()
     }
@@ -88,6 +103,7 @@ class RegistrationForm extends Component {
                                 value={name} htmlFor={'name'}
                                 errorName={errorName} errorInpName={errorInpName}
                                 placeholder={'Введите Ваше имя'}
+                                handleBlur={this.handleBlurInputName}
                                 errorMessage={'Имя введено неправильно'} />
                     </div>
                     <div className="form__label_contactDetails">
@@ -96,6 +112,7 @@ class RegistrationForm extends Component {
                                 value={email} htmlFor={'email'}
                                 errorName={errorEmail} errorInpName={errorInpEmail}
                                 placeholder={'Введите ваш email'}
+                                handleBlur={this.handleBlurInputEmail}
                                 errorMessage={'Введено не корректное значение'} />
                     </div>
                     <div className="form__label_contactDetails">
@@ -104,6 +121,7 @@ class RegistrationForm extends Component {
                                 value={phone} htmlFor={'phone'}
                                 errorName={errorPhone} errorInpName={errorInpPhone}
                                 placeholder={'Введите номер телефона'}
+                                handleBlur={this.handleBlurInputPhone}
                                 errorMessage={'Номер телефона введен неправильно'} />
                     </div>
                     <TodoList 
