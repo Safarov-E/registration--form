@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {onModalDescriptionOpen} from '../../store/actions/actions'
 
 class Checkbox extends Component {
     render() {
@@ -10,14 +11,14 @@ class Checkbox extends Component {
                     <input type="checkbox" checked={checked} className="checkbox" onChange={handleCheckbox} />
                     <span className="fake"></span>
                 </label>
-                <p>Принимаю <span onClick={this}>условия</span> использования</p>
+                <p>Принимаю <span onClick={() => this.props.onModalDescription()}>условия</span> использования</p>
             </div>
         )
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        onModalDescription: () => {}
+        onModalDescription: () => dispatch(onModalDescriptionOpen()),
     }
 }
 export default connect(null, mapDispatchToProps)(Checkbox);

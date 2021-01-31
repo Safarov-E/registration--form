@@ -1,4 +1,4 @@
-import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL} from './action-types' 
+import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL, MODAL_DESCRIPTION_OPEN} from './action-types' 
 
 export function inputName(name) {
     return {
@@ -38,5 +38,10 @@ export function onInputClear() {
 export function onModal() {
     return {
         type: MODAL
+    }
+}
+export function onModalDescriptionOpen() {
+    return {
+        type: MODAL_DESCRIPTION_OPEN
     }
 }
