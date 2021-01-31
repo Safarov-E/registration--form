@@ -1,4 +1,8 @@
-import {NAME_INPUT, EMAIL_INPUT, PHONE_INPUT, LANGUAGE_SELECTION, CHECKED, INPUT_CLEAR, MODAL, MODAL_DESCRIPTION_OPEN} from './actions/action-types'
+import {NAME_INPUT, EMAIL_INPUT, 
+        PHONE_INPUT, LANGUAGE_SELECTION, 
+        CHECKED, INPUT_CLEAR, 
+        MODAL, MODAL_DESCRIPTION_OPEN,
+        MODAL_DESCRIPTION_CLOSE } from './actions/action-types'
 
 const initialState = {
     languages: [
@@ -61,6 +65,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 termsOfUse: true
+            }
+        case MODAL_DESCRIPTION_CLOSE:
+            return {
+                ...state,
+                termsOfUse: false
             }
         default:
             return state

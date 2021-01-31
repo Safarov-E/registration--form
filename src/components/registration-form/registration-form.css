@@ -266,3 +266,45 @@
     display: block;
     transform: translateY(15px);
 }
+
+
+@media screen and (max-width: 465px) {
+    .form {
+        width: 100%;
+        height: 100%;
+    }
+    .select_wrapper span {
+        position: relative;
+        top: 16.8%;
+        left: 90%;
+    }
+}
+@media screen and (max-width: 435px) {
+    .form__label_contactDetails input,
+    .form__label label,
+    .form__label_contactDetails label,
+    .form__label_language div,
+    .form__label_language label,
+    .form__label input {
+        width: 70%;
+    }
+    .from__submit_disabled button {
+        width: 80%;
+        padding: 18px 10px;
+    }
+    .from__submit button {
+        width: 90%;
+        padding: 18px 50px;
+    }
+    .select_wrapper span {
+        left: 87%;
+    }
+    .from__checkbox p {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 398px) {
+    .from__checkbox p {
+        font-size: 12px;
+    }
+}
