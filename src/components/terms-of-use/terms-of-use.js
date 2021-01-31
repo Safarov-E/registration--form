@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import './terms-of-use.css'
-import {onModalDescriptionClose} from '../../store/actions/actions'
 
 class TermsOfUse extends Component {
     render() {
@@ -14,15 +13,20 @@ class TermsOfUse extends Component {
                     <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.  </p>
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
                     <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                    <button onClick={() => this.props.onModalDescription()}>Продолжить</button>
+                    <button>Продолжить</button>
                 </div>
             </div>
         )
     }
 }
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
     return {
-        onModalDescription: () => dispatch(onModalDescriptionClose())
+        
     }
 }
-export default connect(null, mapDispatchToProps)(TermsOfUse);
+function mapDispatchToProps(dispatch) {
+    return {
+        
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TermsOfUse);
