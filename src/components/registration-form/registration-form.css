@@ -288,13 +288,10 @@
     .form__label input {
         width: 70%;
     }
-    .from__submit_disabled button {
+    .from__submit_disabled button,
+    .from__submit button {
         width: 80%;
         padding: 18px 10px;
-    }
-    .from__submit button {
-        width: 90%;
-        padding: 18px 50px;
     }
     .select_wrapper span {
         left: 87%;
