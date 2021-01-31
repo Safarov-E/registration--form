@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 
 class Checkbox extends Component {
     render() {
@@ -9,9 +10,14 @@ class Checkbox extends Component {
                     <input type="checkbox" checked={checked} className="checkbox" onChange={handleCheckbox} />
                     <span className="fake"></span>
                 </label>
-                <p>Принимаю <a href="/">условия</a> использования</p>
+                <p>Принимаю <span onClick={this}>условия</span> использования</p>
             </div>
         )
     }
 }
-export default Checkbox;
+function mapDispatchToProps(dispatch) {
+    return {
+        onModalDescription: () => {}
+    }
+}
+export default connect(null, mapDispatchToProps)(Checkbox);

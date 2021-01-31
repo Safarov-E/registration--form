@@ -6,6 +6,7 @@ import {inputName, inputEmail, inputPhone, languageSelection, onChecked, onModal
 import Checkbox from '../checkbox'
 import TodoList from '../todo-list'
 import Modal from '../modal'
+import TermsOfUse from '../terms-of-use'
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -87,7 +88,7 @@ class RegistrationForm extends Component {
     }
     render() {
         const {display, errorName, errorEmail, errorPhone, errorInpName, errorInpEmail, errorInpPhone} = this.state;
-        const {name, email, phone, language, checked, modal, languages,} = this.props;
+        const {name, email, phone, language, checked, modal, languages, termsOfUse} = this.props;
         return (
             <>
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -134,6 +135,7 @@ class RegistrationForm extends Component {
                     </div>
                 </form>
                 {modal ? <Modal /> : null}
+                {termsOfUse ? <TermsOfUse /> : null}
             </>
         )
     }
@@ -146,7 +148,8 @@ function mapStateToProps(state) {
         language: state.language,
         checked: state.checked,
         modal: state.modal,
-        languages: state.languages
+        languages: state.languages,
+        termsOfUse: state.termsOfUse
     }
 }
 function mapDispatchToProps(dispatch) {

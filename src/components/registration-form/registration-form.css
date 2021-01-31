@@ -194,9 +194,10 @@
     line-height: 21px;
     color: #756F86;
 }
-.from__checkbox a {
+.from__checkbox span {
     text-decoration: none;
     color: #0880ae;
+    cursor: pointer;
 }
 .fake {
     display: inline-block;

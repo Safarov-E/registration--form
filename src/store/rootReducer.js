@@ -13,6 +13,7 @@ const initialState = {
     language: '',
     checked: false,
     modal: false,
+    termsOfUse: false
 }
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
